@@ -91,7 +91,7 @@ const struct pcf50633_init pcf50633_init[] = {
 	{ PCF50633_REG_HCLDOOUT,	21 },	/* 3.0V (21 * 0.1V + 0.9V) */
 	{ PCF50633_REG_HCLDOENA,	0x01 }, /* ON by default*/
 
-	{ PCF50633_REG_DOWN1OUT,	0x1b }, /* 1.3V (0x1b * .025V + 0.625V) */
+	{ PCF50633_REG_DOWN1OUT,	0x25 }, /* 1.55V (0x25 * .025V + 0.625V) */
 	{ PCF50633_REG_DOWN1ENA,	0x02 }, /* enabled if GPIO1 = HIGH */
 
 	{ PCF50633_REG_INT1M,		0x00 },
@@ -317,7 +317,7 @@ void port_init_gta02(void)
 			"nop\n"
 		);
 		/* configure MPLL */
-		*MPLLCON = ((42 << 12) + (1 << 4) + 0);
+		*MPLLCON = ((147 << 12) + (2 << 4) + 1); /* 465MHz */
 
 		/* get debug UART working at 115kbps */
 		serial_init_115200_s3c24xx(GTA02_DEBUG_UART, 50 /* 50MHz */);
